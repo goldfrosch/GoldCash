@@ -60,7 +60,7 @@ public class MainPlugin extends JavaPlugin implements Listener {
     }
 
     //command
-    Commands cmd = new Commands(this,"cmd");
+    Commands cmd = new Commands(this,"cash", dataSource);
     getCommand(cmd.getCommand()).setExecutor(cmd);
     getCommand(cmd.getCommand()).setTabCompleter(cmd);
 
