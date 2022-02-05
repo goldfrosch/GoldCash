@@ -40,6 +40,6 @@ public class DBSetup {
             }
             conn.commit();
         }
-        plugin.getLogger().info("DB 테이블 추가가 완료되었습니다.");
+        plugin.getLogger().info("DB 테이블 세팅이 완료되었습니다.");
     }
 }

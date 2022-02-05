@@ -32,4 +32,32 @@ public final class AsyncScheduler<T> {
     public static <T> AsyncScheduler<T> supplyAsync(Plugin plugin, Supplier<T> asyncSupplier) {
         return new AsyncScheduler<>(plugin, asyncSupplier, getDangerLog(plugin));
     }
+
+    public void queue(Consumer<T> syncedConsumer) {
+        executeAsync(asyncSupplier, syncedConsumer);
+    }
+
+    private void executeAsync(Supplier<T> asyncSupplier, Consumer<T> syncedConsumer) {
+        executeAsync(asyncSupplier, syncedConsumer, asyncErrorHandler, getDangerLog(plugin));
+    }
+
+    private void executeAsync(Supplier<T> asyncSupplier, Consumer<T> syncedConsumer,
+                              Consumer<Throwable> asyncErrorHandler, Consumer<Throwable> syncedErrorHandler) {
+        executor.execute(() -> {
+            T result;
+            try {
+                result = asyncSupplier.get();
+            } catch (Throwable e) {
+                asyncErrorHandler.accept(e);
+                return;
+            }
+            scheduler.runTask(plugin, () -> {
+                try {
+                    syncedConsumer.accept(result);
+                } catch (Throwable e) {
+                    syncedErrorHandler.accept(e);
+                }
+            });
+        });
+    }
 }

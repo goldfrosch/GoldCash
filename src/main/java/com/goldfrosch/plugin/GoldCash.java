@@ -5,9 +5,7 @@ import com.goldfrosch.plugin.config.Configuration;
 import com.goldfrosch.plugin.config.object.Database;
 import com.goldfrosch.plugin.database.DBConverter;
 import com.goldfrosch.plugin.database.DBSetup;
-import com.goldfrosch.plugin.events.NewEvent;
 
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -18,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-public class MainPlugin extends JavaPlugin implements Listener {
+public class GoldCash extends JavaPlugin implements Listener {
   private PluginDescriptionFile pdfFile = this.getDescription();
   private String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
 
@@ -27,9 +25,6 @@ public class MainPlugin extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable(){
-    //이벤트 등록
-    Bukkit.getPluginManager().registerEvents(new NewEvent(this),this);
-    
     //Config DB 등록하기
     ConfigurationSerialization.registerClass(Database.class);
     
