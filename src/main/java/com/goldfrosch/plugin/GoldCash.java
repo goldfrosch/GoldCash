@@ -7,6 +7,8 @@ import com.goldfrosch.plugin.database.DBConverter;
 import com.goldfrosch.plugin.database.DBSetup;
 
 import com.goldfrosch.plugin.events.CashEvent;
+import com.goldfrosch.plugin.utils.placeholder.Placeholders;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -62,6 +64,11 @@ public class GoldCash extends JavaPlugin implements Listener {
 
     //event
     register(dataSource);
+
+    //placeholderAPI
+    if(Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")){
+      new Placeholders(this, dataSource).register();
+    }
 
     consoleLog(pfName+"이 활성화 되었습니다");
     super.onEnable();

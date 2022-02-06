@@ -3,6 +3,8 @@ name: GoldCash
 version: 0.0.1-SNAPSHOT
 api-version: 1.16
 author: GoldFrosch
+softdepend:
+  - PlaceholderAPI
 commands:
   cash:
     description: HO!
