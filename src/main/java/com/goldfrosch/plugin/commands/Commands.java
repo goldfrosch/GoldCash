@@ -29,7 +29,7 @@ public class Commands extends AbstractCommand{
       Player player = (Player) sender;
       if(label.equalsIgnoreCase("cash")){
         if(args.length == 0){
-          cashQuery.getCash(player).queue(cash -> { player.sendMessage(prefix + "현재 나의 캐시: " + cash.getAsLong() + "원"); });
+          player.sendMessage(prefix + "현재 나의 캐시: " + cashQuery.getCash(player) + "원");
         }
         else if(args[0].equalsIgnoreCase("help")){
           player.sendMessage(ChatColor.GRAY + "==================================================");

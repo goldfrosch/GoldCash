@@ -6,6 +6,7 @@ import com.goldfrosch.plugin.config.object.Database;
 import com.goldfrosch.plugin.database.DBConverter;
 import com.goldfrosch.plugin.database.DBSetup;
 
+import com.goldfrosch.plugin.events.CashEvent;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -59,6 +60,9 @@ public class GoldCash extends JavaPlugin implements Listener {
     getCommand(cmd.getCommand()).setExecutor(cmd);
     getCommand(cmd.getCommand()).setTabCompleter(cmd);
 
+    //event
+    register(dataSource);
+
     consoleLog(pfName+"이 활성화 되었습니다");
     super.onEnable();
   }
@@ -75,5 +79,9 @@ public class GoldCash extends JavaPlugin implements Listener {
 
   public void consoleDanger(String msg, Exception e) {
     getLogger().log(Level.SEVERE, msg, e);
+  }
+
+  public void register(DataSource dataSource) {
+    new CashEvent(this, dataSource);
   }
 }

@@ -22,6 +22,5 @@ public class CashEvent implements Listener {
   @EventHandler
   public void onPlayerJoinEvent(PlayerJoinEvent e) {
     cashQuery.addCash(e.getPlayer(), 0);
-    e.getPlayer().sendMessage("테스트");
   }
 }
