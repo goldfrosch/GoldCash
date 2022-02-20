@@ -34,11 +34,11 @@ public class CashQuery extends PluginDataHolder {
 
     public Boolean takeCash(Player player, long amount) {
         try (Connection conn = conn(); PreparedStatement stmt = conn.prepareStatement(
-                "UPDATE player_cash SET cash = cash - ? where uuid = ? and cash >= ?;"
+                "UPDATE player_cash SET cash = IF(cash >= ?, cash - ?, 0) where uuid = ?;"
         )) {
             stmt.setLong(1, amount);
-            stmt.setString(2, player.getUniqueId().toString());
-            stmt.setLong(3, amount);
+            stmt.setLong(2, amount);
+            stmt.setString(3, player.getUniqueId().toString());
             int updated = stmt.executeUpdate();
             return updated == 1;
         } catch (SQLException e) {
