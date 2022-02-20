@@ -1,5 +1,5 @@
 message:
-  prefix: "&fTEST"
+  prefix: "&8[ &6GoldCash &8]&7:: "
 driver: mariadb
 database:
   ==: GoldCash
