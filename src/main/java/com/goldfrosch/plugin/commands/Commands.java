@@ -24,12 +24,16 @@ public class Commands extends AbstractCommand{
     switch (type.toUpperCase(Locale.ROOT)) {
       case "ADD":
         cashQuery.addCash(player, Integer.parseInt(money));
+        break;
       case "TAKE":
         cashQuery.takeCash(player, Integer.parseInt(money));
+        break;
       case "SET":
         cashQuery.setCash(player, Integer.parseInt(money));
+        break;
       default:
         player.sendMessage(prefix + "잘못된 명령어 입니다.");
+        break;
     }
   }
 
