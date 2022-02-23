@@ -1,11 +1,13 @@
 package com.goldfrosch.plugin.config.object;
 
+import lombok.Getter;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+@Getter
 @SerializableAs("GoldCash")
 public class Database implements ConfigurationSerializable {
     private final String host;
@@ -39,26 +41,5 @@ public class Database implements ConfigurationSerializable {
         map.put("user", user);
         map.put("password", password);
         return map;
-    }
-
-
-    public String getHost() {
-        return host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public String getDatabase() {
-        return database;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

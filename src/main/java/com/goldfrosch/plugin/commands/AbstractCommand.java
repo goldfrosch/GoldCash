@@ -1,6 +1,7 @@
 package com.goldfrosch.plugin.commands;
 
 import com.goldfrosch.plugin.GoldCash;
+import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -8,6 +9,7 @@ import org.bukkit.command.TabExecutor;
 import javax.sql.DataSource;
 import java.util.List;
 
+@Getter
 public abstract class AbstractCommand implements TabExecutor {
   protected GoldCash plugin;
   private String Command;
@@ -18,11 +20,6 @@ public abstract class AbstractCommand implements TabExecutor {
     this.Command = Command;
     this.dataSource = dataSource;
   }
-
-  public String getCommand() {
-    return Command;
-  }
-  public DataSource getDataSource() { return dataSource; }
 
   public abstract List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias, String[] args);
   public abstract boolean onCommand(CommandSender sender, Command command, String label, String[] args);
