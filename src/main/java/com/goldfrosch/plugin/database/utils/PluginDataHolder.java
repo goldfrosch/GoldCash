@@ -1,5 +1,6 @@
 package com.goldfrosch.plugin.database.utils;
 
+import lombok.RequiredArgsConstructor;
 import org.bukkit.plugin.Plugin;
 
 import javax.sql.DataSource;
@@ -7,14 +8,10 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+@RequiredArgsConstructor
 public class PluginDataHolder {
     private final Plugin plugin;
     private final DataSource source;
-
-    public PluginDataHolder(Plugin plugin, DataSource source) {
-        this.plugin = plugin;
-        this.source = source;
-    }
 
     protected Connection conn() throws SQLException {
         return source.getConnection();

@@ -1,8 +1,10 @@
 package com.goldfrosch.plugin.config;
 
 import com.goldfrosch.plugin.config.object.Database;
+import lombok.Getter;
 import org.bukkit.plugin.Plugin;
 
+@Getter
 public class Configuration {
     private final Plugin plugin;
 
@@ -17,17 +19,5 @@ public class Configuration {
     public void reload() {
         database = plugin.getConfig().getObject("database", Database.class, new Database());
         driver = plugin.getConfig().getString("driver");
-    }
-
-    public Plugin getPlugin() {
-        return plugin;
-    }
-
-    public String getDriver() {
-        return driver;
-    }
-
-    public Database getDatabase() {
-        return database;
     }
 }
