@@ -86,7 +86,9 @@ public class Commands extends AbstractCommand{
             if (args.length == 1) {
               player.sendMessage(ChatColor.GRAY + "==================================================");
               player.sendMessage(ChatColor.AQUA + "/cash admin" + ChatColor.WHITE + " : 어드민 관련 명령어를 확인합니다.");
-              player.sendMessage(ChatColor.GREEN + "/cash admin add" + ChatColor.WHITE + " : 이 플러그인의 도움말을 출력합니다.");
+              player.sendMessage(ChatColor.GREEN + "/cash admin add <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>만큼 부여합니다. <플레이어>생략 가능");
+              player.sendMessage(ChatColor.GREEN + "/cash admin take <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>만큼 차감합니다. <플레이어>생략 가능");
+              player.sendMessage(ChatColor.GREEN + "/cash admin set <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>로 설정합니다. <플레이어>생략 가능");
               player.sendMessage(ChatColor.GRAY + "==================================================");
             }
             else {
