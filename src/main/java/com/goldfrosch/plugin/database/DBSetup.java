@@ -39,7 +39,10 @@ public class DBSetup {
                 }
             }
             conn.commit();
+        } catch(SQLException e) {
+            plugin.getLogger().log(Level.SEVERE, "쿼리 인식 과정에 문제 발생", e);
         }
+        
         plugin.getLogger().info("DB 테이블 세팅이 완료되었습니다.");
     }
 }
