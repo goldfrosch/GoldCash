@@ -1,6 +1,6 @@
 package com.goldfrosch.commands;
 
-import com.goldfrosch.plugin.GoldCash;
+import com.goldfrosch.GoldCash;
 import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

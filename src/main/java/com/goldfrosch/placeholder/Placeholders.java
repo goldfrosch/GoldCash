@@ -1,6 +1,6 @@
 package com.goldfrosch.placeholder;
 
-import com.goldfrosch.plugin.GoldCash;
+import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashQuery;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;

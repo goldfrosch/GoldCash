@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class DBConverter {
     public static DataSource initMariaDBDataSource(Plugin plugin, Database database) throws SQLException  {
         //MariaDB 연동 선언
-        MariaDbPoolDataSource dataSource = new MariaDbPoolDataSource();
+        var dataSource = new MariaDbPoolDataSource();
 
         //MariaDB 연결 설정
         dataSource.setServerName(database.getHost());
@@ -32,7 +32,7 @@ public class DBConverter {
     }
 
     public static void testDataSource(Plugin plugin, DataSource dataSource) throws SQLException {
-        try (Connection conn = dataSource.getConnection()) {
+        try (var conn = dataSource.getConnection()) {
             if(!conn.isValid(1000)) {
                 throw new SQLException("데이터베이스 연결 실패");
             }

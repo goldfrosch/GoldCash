@@ -1,6 +1,6 @@
 package com.goldfrosch.commands;
 
-import com.goldfrosch.plugin.GoldCash;
+import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashQuery;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

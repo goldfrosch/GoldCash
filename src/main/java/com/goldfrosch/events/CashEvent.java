@@ -1,6 +1,6 @@
 package com.goldfrosch.events;
 
-import com.goldfrosch.plugin.GoldCash;
+import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashQuery;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

@@ -16,18 +16,18 @@ import java.util.stream.Collectors;
 public class DBSetup {
     public static void initDB(Plugin plugin, DataSource dataSource) throws SQLException, IOException {
         //DB 쿼리 선언문
-        String setup = "";
+        var setup = "";
 
         //특정 이름의 파일 값을 클래스에 로드하는 방법
-        try(InputStream inputStream = DBSetup.class.getClassLoader().getResourceAsStream("setup.sql")) {
+        try(var inputStream = DBSetup.class.getClassLoader().getResourceAsStream("setup.sql")) {
             //파일을 불러와서 엔터마다 한줄로 조인시키는 듯함
             setup = new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.joining("\n"));
         } catch (IOException e) {
             plugin.getLogger().log(Level.SEVERE, "DB 셋업 파일을 인식할 수 없습니다.", e);
         }
 
-        String[] queries = setup.split(";");
-        try(Connection conn = dataSource.getConnection()) {
+        var queries = setup.split(";");
+        try(var conn = dataSource.getConnection()) {
             //모든 sql문이 개별 트렌젝션으로 실행되는 가?
             //create table의 경우에는 그럴 필요가 없음
             conn.setAutoCommit(false);
