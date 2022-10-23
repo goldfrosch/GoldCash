@@ -12,8 +12,8 @@ import java.util.List;
 @Getter
 public abstract class AbstractCommand implements TabExecutor {
   protected GoldCash plugin;
-  private String Command;
-  private DataSource dataSource;
+  private final String Command;
+  private final DataSource dataSource;
 
   public AbstractCommand(GoldCash plugin, String Command, DataSource dataSource) {
     this.plugin = plugin;

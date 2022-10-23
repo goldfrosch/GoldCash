@@ -17,23 +17,15 @@ public class Commands extends AbstractCommand{
     super(plugin, Command, dataSource);
   }
 
-  private CashQuery cashQuery = new CashQuery(plugin, this.getDataSource());
+  private final CashQuery cashQuery = new CashQuery(plugin, this.getDataSource());
   String prefix = plugin.getConfig().getString("message.prefix").replace("&", "§");
 
   private void adminCashSet(String type, String money, Player player) {
     switch (type.toUpperCase(Locale.ROOT)) {
-      case "ADD":
-        cashQuery.addCash(player, Integer.parseInt(money));
-        break;
-      case "TAKE":
-        cashQuery.takeCash(player, Integer.parseInt(money));
-        break;
-      case "SET":
-        cashQuery.setCash(player, Integer.parseInt(money));
-        break;
-      default:
-        player.sendMessage(prefix + "잘못된 명령어 입니다.");
-        break;
+      case "ADD" -> cashQuery.addCash(player, Integer.parseInt(money));
+      case "TAKE" -> cashQuery.takeCash(player, Integer.parseInt(money));
+      case "SET" -> cashQuery.setCash(player, Integer.parseInt(money));
+      default -> player.sendMessage(prefix + "잘못된 명령어 입니다.");
     }
   }
 
@@ -68,8 +60,7 @@ public class Commands extends AbstractCommand{
 
   @Override
   public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
-    if (sender instanceof Player) {
-      Player player = (Player) sender;
+    if (sender instanceof Player player) {
       if (label.equalsIgnoreCase("cash")) {
         if (args.length == 0) {
           player.sendMessage(prefix + "현재 나의 캐시: " + cashQuery.getCash(player) + "원");
