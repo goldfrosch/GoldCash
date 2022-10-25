@@ -16,14 +16,6 @@ public class Database implements ConfigurationSerializable {
     private final String user;
     private final String password;
 
-    public Database(Map<String, Object> map) {
-        host = String.valueOf(map.getOrDefault("host", "localhost"));
-        port = (int) map.getOrDefault("port", "3306");
-        database = String.valueOf(map.getOrDefault("database", "mariadb"));
-        user = String.valueOf(map.getOrDefault("user", "root"));
-        password = String.valueOf(map.getOrDefault("password", "1234"));
-    }
-
     public Database() {
         host = "localhost";
         port = 3306;
