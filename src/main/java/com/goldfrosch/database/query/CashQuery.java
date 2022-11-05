@@ -1,7 +1,7 @@
 package com.goldfrosch.database.query;
 
 import com.goldfrosch.GoldCash;
-import com.goldfrosch.database.utils.PluginDataHolder;
+import com.goldfrosch.utils.PluginDataHolder;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
