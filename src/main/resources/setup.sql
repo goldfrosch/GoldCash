@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS player_cash_log
     log_status CHAR(20) NOT NULL,
     manager CHAR(36) NOT NULL,
     product VARCHAR NULL,
-    reg_date DATE NOT NULL,
+    reg_date DATE NOT NULL DEFAULT NOW(),
 );
 
 CREATE INDEX idx_player_cash_log_by_uuid ON player_cash_log (uuid);

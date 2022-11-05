@@ -2,6 +2,14 @@ package com.goldfrosch.commands;
 
 import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashQuery;
+import com.goldfrosch.object.entity.CashDAO;
+import com.goldfrosch.object.type.CashChargeType;
+import com.goldfrosch.object.type.CashUseStatus;
+import com.goldfrosch.service.AdminCashService;
+
+import com.goldfrosch.service.UserCashService;
+import java.util.Locale;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -9,22 +17,27 @@ import org.bukkit.entity.Player;
 
 import javax.sql.DataSource;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
 
 public class Commands extends AbstractCommand {
 
+  private final AdminCashService adminCashService;
+  private final UserCashService userCashService;
+
+
   public Commands(GoldCash plugin, String Command, DataSource dataSource) {
     super(plugin, Command, dataSource);
+    this.adminCashService = new AdminCashService(plugin, dataSource, new CashQuery());
+    this.userCashService = new UserCashService(plugin, dataSource, new CashQuery());
   }
 
-  private final CashQuery cashQuery = new CashQuery(plugin, this.getDataSource());
+
   String prefix = plugin.getConfig().getString("message.prefix").replace("&", "§");
 
-  private void adminCashSet(String type, String money, Player player) {
+  private void adminCashSet(String type, CashDAO cashDAO) {
+    var player = cashDAO.getManager();
     switch (type.toUpperCase(Locale.ROOT)) {
-      case "ADD" -> cashQuery.addCash(player, Integer.parseInt(money));
-      case "TAKE" -> cashQuery.takeCash(player, Integer.parseInt(money));
+      case "ADD" -> adminCashService.addCash(cashDAO);
       default -> player.sendMessage(prefix + "잘못된 명령어 입니다.");
     }
   }
@@ -32,15 +45,20 @@ public class Commands extends AbstractCommand {
   private void adminCashSetting(String[] args, Player player) {
     if (args.length == 3) {
       if (args[2].matches("[+-]?\\d*(\\.\\d+)?")) {
-        adminCashSet(args[1], args[2], player);
-        player.sendMessage(prefix + "현재 나의 캐시: " + cashQuery.getCash(player) + "원");
+//        adminCashSet(args[1], args[2], player);
+//        player.sendMessage(prefix + "현재 나의 캐시: " + cashQuery.getCash(player) + "원");
       } else {
         player.sendMessage(prefix + "숫자를 입력해주세요");
       }
     } else if (args.length == 4) {
       if (args[3].matches("[+-]?\\d*(\\.\\d+)?")) {
+        var money = Integer.parseInt(args[3]);
+        var userCashDAO = CashDAO.builder()
+            .player(Objects.requireNonNull(Bukkit.getPlayer(args[2]))).amount(money)
+            .cashChargeType(CashChargeType.CREDIT_CARD).cashUseStatus(CashUseStatus.CHARGE)
+            .manager(player).build();
         if (Objects.requireNonNull(Bukkit.getPlayer(args[2])).isOnline()) {
-          adminCashSet(args[1], args[3], Objects.requireNonNull(Bukkit.getPlayer(args[2])));
+          adminCashSet(args[1], userCashDAO);
           player.sendMessage(prefix + "성공적으로 캐시를 설정했습니다!");
         } else {
           player.sendMessage(prefix + "플레이어가 온라인이 아니거나 존재하지 않습니다.");
@@ -65,7 +83,7 @@ public class Commands extends AbstractCommand {
     if (sender instanceof Player player) {
       if (label.equalsIgnoreCase("cash")) {
         if (args.length == 0) {
-          player.sendMessage(prefix + "현재 나의 캐시: " + cashQuery.getCash(player) + "원");
+          player.sendMessage(prefix + "현재 나의 캐시: " + userCashService.getPlayerCash(player) + "원");
         } else if (args[0].equalsIgnoreCase("help")) {
           player.sendMessage(ChatColor.GRAY + "==================================================");
           player.sendMessage(ChatColor.AQUA + "/cash" + ChatColor.WHITE + " : 현재 나의 캐시를 확인합니다");
