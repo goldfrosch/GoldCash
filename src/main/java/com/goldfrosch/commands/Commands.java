@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-public class Commands extends AbstractCommand{
+public class Commands extends AbstractCommand {
+
   public Commands(GoldCash plugin, String Command, DataSource dataSource) {
     super(plugin, Command, dataSource);
   }
@@ -24,7 +25,6 @@ public class Commands extends AbstractCommand{
     switch (type.toUpperCase(Locale.ROOT)) {
       case "ADD" -> cashQuery.addCash(player, Integer.parseInt(money));
       case "TAKE" -> cashQuery.takeCash(player, Integer.parseInt(money));
-      case "SET" -> cashQuery.setCash(player, Integer.parseInt(money));
       default -> player.sendMessage(prefix + "잘못된 명령어 입니다.");
     }
   }
@@ -54,12 +54,14 @@ public class Commands extends AbstractCommand{
   }
 
   @Override
-  public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command, String alias, String[] args) {
+  public List<String> onTabComplete(CommandSender sender, org.bukkit.command.Command command,
+      String alias, String[] args) {
     return null;
   }
 
   @Override
-  public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label, String[] args) {
+  public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String label,
+      String[] args) {
     if (sender instanceof Player player) {
       if (label.equalsIgnoreCase("cash")) {
         if (args.length == 0) {
@@ -67,27 +69,31 @@ public class Commands extends AbstractCommand{
         } else if (args[0].equalsIgnoreCase("help")) {
           player.sendMessage(ChatColor.GRAY + "==================================================");
           player.sendMessage(ChatColor.AQUA + "/cash" + ChatColor.WHITE + " : 현재 나의 캐시를 확인합니다");
-          player.sendMessage(ChatColor.GREEN + "/cash help" + ChatColor.WHITE + " : 이 플러그인의 도움말을 출력합니다.");
-          player.sendMessage(ChatColor.GREEN + "/cash get [playerName]" + ChatColor.WHITE + " : [playerName]의 캐시 보유량을 보여줍니다");
+          player.sendMessage(
+              ChatColor.GREEN + "/cash help" + ChatColor.WHITE + " : 이 플러그인의 도움말을 출력합니다.");
+          player.sendMessage(ChatColor.GREEN + "/cash get [playerName]" + ChatColor.WHITE
+              + " : [playerName]의 캐시 보유량을 보여줍니다");
           player.sendMessage(ChatColor.GRAY + "==================================================");
         } else if (args[0].equalsIgnoreCase("admin")) {
           if (!player.hasPermission("cash.admin")) {
             player.sendMessage(prefix + "권한이 없습니다!");
           } else {
             if (args.length == 1) {
-              player.sendMessage(ChatColor.GRAY + "==================================================");
-              player.sendMessage(ChatColor.AQUA + "/cash admin" + ChatColor.WHITE + " : 어드민 관련 명령어를 확인합니다.");
-              player.sendMessage(ChatColor.GREEN + "/cash admin add <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>만큼 부여합니다. <플레이어>생략 가능");
-              player.sendMessage(ChatColor.GREEN + "/cash admin take <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>만큼 차감합니다. <플레이어>생략 가능");
-              player.sendMessage(ChatColor.GREEN + "/cash admin set <플레이어> [숫자]" + ChatColor.WHITE + "<플레이어>에게 캐시를 <숫자>로 설정합니다. <플레이어>생략 가능");
-              player.sendMessage(ChatColor.GRAY + "==================================================");
-            }
-            else {
+              player.sendMessage(
+                  ChatColor.GRAY + "==================================================");
+              player.sendMessage(
+                  ChatColor.AQUA + "/cash admin" + ChatColor.WHITE + " : 어드민 관련 명령어를 확인합니다.");
+              player.sendMessage(ChatColor.GREEN + "/cash admin add <플레이어> [숫자]" + ChatColor.WHITE
+                  + "<플레이어>에게 캐시를 <숫자>만큼 부여합니다. <플레이어>생략 가능");
+              player.sendMessage(ChatColor.GREEN + "/cash admin take <플레이어> [숫자]" + ChatColor.WHITE
+                  + "<플레이어>에게 캐시를 <숫자>만큼 차감합니다. <플레이어>생략 가능");
+              player.sendMessage(
+                  ChatColor.GRAY + "==================================================");
+            } else {
               adminCashSetting(args, player);
             }
           }
-        }
-        else {
+        } else {
           player.sendMessage(prefix + "존재하지 않는 명령어 입니다.");
         }
       }

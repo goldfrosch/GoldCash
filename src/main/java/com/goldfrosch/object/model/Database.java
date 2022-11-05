@@ -1,4 +1,4 @@
-package com.goldfrosch.config.object;
+package com.goldfrosch.object.model;
 
 import lombok.Getter;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;

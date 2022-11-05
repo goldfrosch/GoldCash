@@ -1,4 +1,4 @@
-package com.goldfrosch.database.utils;
+package com.goldfrosch.utils;
 
 import lombok.RequiredArgsConstructor;
 import org.bukkit.plugin.Plugin;

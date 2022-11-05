@@ -2,7 +2,7 @@ package com.goldfrosch;
 
 import com.goldfrosch.commands.Commands;
 import com.goldfrosch.config.Configuration;
-import com.goldfrosch.config.object.Database;
+import com.goldfrosch.object.model.Database;
 import com.goldfrosch.database.DBConverter;
 import com.goldfrosch.database.DBSetup;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public final class GoldCash extends JavaPlugin {
     config = new Configuration(this);
 
     try {
-      if(config.getDriver().equalsIgnoreCase("mariadb")) {
+      if (config.getDriver().equalsIgnoreCase("mariadb")) {
         dataSource = DBConverter.initMariaDBDataSource(this, config.getDatabase());
         consoleLog("성공적으로 연결되었습니다");
       }
@@ -48,7 +48,7 @@ public final class GoldCash extends JavaPlugin {
     }
 
     //command
-    var cmd = new Commands(this,"cmd", dataSource);
+    var cmd = new Commands(this,"cash", dataSource);
     getCommand(cmd.getCommand()).setExecutor(cmd);
     getCommand(cmd.getCommand()).setTabCompleter(cmd);
 
@@ -59,7 +59,8 @@ public final class GoldCash extends JavaPlugin {
 
   @Override
   public void onDisable() {
-    // Plugin shutdown logic
+    consoleLog(pfName+"이 비활성화 되었습니다");
+    super.onDisable();
   }
 
   public void consoleLog(String msg){

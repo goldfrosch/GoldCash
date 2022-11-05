@@ -9,13 +9,10 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import javax.sql.DataSource;
 
 public class CashEvent implements Listener {
-  private final GoldCash plugin;
-  private CashQuery cashQuery;
+  private final CashQuery cashQuery;
 
   public CashEvent(GoldCash plugin, DataSource dataSource){
-    this.plugin = plugin;
-    cashQuery = new CashQuery(plugin, dataSource);
-
+    this.cashQuery = new CashQuery(plugin, dataSource);
     plugin.getServer().getPluginManager().registerEvents(this, plugin);
   }
 

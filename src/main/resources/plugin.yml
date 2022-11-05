@@ -1,0 +1,9 @@
+name: GoldCash
+version: '${project.version}'
+main: com.goldfrosch.GoldCash
+api-version: 1.18
+authors: [ GoldFrosch ]
+description: You can use cash database
+commands:
+    cash:
+        description: HO!

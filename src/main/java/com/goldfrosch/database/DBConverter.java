@@ -1,12 +1,11 @@
 package com.goldfrosch.database;
 
-import com.goldfrosch.config.object.Database;
+import com.goldfrosch.object.model.Database;
 
 import org.bukkit.plugin.Plugin;
 import org.mariadb.jdbc.MariaDbPoolDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBConverter {
