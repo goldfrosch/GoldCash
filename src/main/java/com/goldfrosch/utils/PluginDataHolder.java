@@ -1,7 +1,7 @@
 package com.goldfrosch.utils;
 
+import com.goldfrosch.GoldCash;
 import lombok.RequiredArgsConstructor;
-import org.bukkit.plugin.Plugin;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -11,7 +11,7 @@ import java.util.logging.Level;
 @RequiredArgsConstructor
 public class PluginDataHolder {
 
-  private final Plugin plugin;
+  private final GoldCash plugin;
   private final DataSource source;
 
   protected Connection conn() throws SQLException {
@@ -40,7 +40,7 @@ public class PluginDataHolder {
     return source;
   }
 
-  protected Plugin plugin() {
+  protected GoldCash plugin() {
     return plugin;
   }
 }

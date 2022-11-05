@@ -5,3 +5,5 @@ database:
   database: "mariadb"
   user: "root"
   password: "1234"
+message:
+  prefix: "GoldCash:: "

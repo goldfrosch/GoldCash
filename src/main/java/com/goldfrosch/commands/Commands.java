@@ -62,7 +62,6 @@ public class Commands extends AbstractCommand {
             .manager(player).build();
         if (Objects.requireNonNull(Bukkit.getPlayer(args[2])).isOnline()) {
           adminCashSet(args[1], userCashDAO);
-          player.sendMessage(prefix + "성공적으로 캐시를 설정했습니다!");
         } else {
           player.sendMessage(prefix + "플레이어가 온라인이 아니거나 존재하지 않습니다.");
         }

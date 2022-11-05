@@ -1,19 +1,19 @@
 package com.goldfrosch.service;
 
+import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashLogQuery;
 import com.goldfrosch.database.query.CashQuery;
 import com.goldfrosch.object.entity.CashDAO;
 import com.goldfrosch.utils.PluginDataHolder;
 import java.sql.SQLException;
 import javax.sql.DataSource;
-import org.bukkit.plugin.Plugin;
 
 public class AdminCashService extends PluginDataHolder {
 
   private final CashQuery cashQuery;
   private final CashLogQuery cashLogQuery;
 
-  public AdminCashService(Plugin plugin, DataSource source, CashQuery cashQuery,
+  public AdminCashService(GoldCash plugin, DataSource source, CashQuery cashQuery,
       CashLogQuery cashLogQuery) {
     super(plugin, source);
     this.cashQuery = cashQuery;
@@ -23,6 +23,9 @@ public class AdminCashService extends PluginDataHolder {
   public void addCash(CashDAO cashDAO) {
     try {
       conn().setAutoCommit(false);
+      plugin().consoleLog(
+          "###### 캐시 충전 유저: " + cashDAO.getPlayer().getUniqueId() + " 금액: " + cashDAO.getAmount()
+              + "처리자: " + cashDAO.getManager().getDisplayName());
       cashQuery.addCash(cashDAO, conn());
       cashLogQuery.addCashLog(cashDAO, conn());
 
