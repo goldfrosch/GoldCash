@@ -1,3 +1,4 @@
+driver: "mariadb"
 database:
   host: "localhost"
   port: 3306
