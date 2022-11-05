@@ -1,6 +1,7 @@
 package com.goldfrosch.commands;
 
 import com.goldfrosch.GoldCash;
+import com.goldfrosch.database.query.CashLogQuery;
 import com.goldfrosch.database.query.CashQuery;
 import com.goldfrosch.object.entity.CashDAO;
 import com.goldfrosch.object.type.CashChargeType;
@@ -27,7 +28,8 @@ public class Commands extends AbstractCommand {
 
   public Commands(GoldCash plugin, String Command, DataSource dataSource) {
     super(plugin, Command, dataSource);
-    this.adminCashService = new AdminCashService(plugin, dataSource, new CashQuery());
+    this.adminCashService = new AdminCashService(plugin, dataSource, new CashQuery(),
+        new CashLogQuery());
     this.userCashService = new UserCashService(plugin, dataSource, new CashQuery());
   }
 
@@ -38,6 +40,7 @@ public class Commands extends AbstractCommand {
     var player = cashDAO.getManager();
     switch (type.toUpperCase(Locale.ROOT)) {
       case "ADD" -> adminCashService.addCash(cashDAO);
+      case "TAKE" -> adminCashService.takeCash(cashDAO);
       default -> player.sendMessage(prefix + "잘못된 명령어 입니다.");
     }
   }

@@ -30,7 +30,23 @@ public class AdminCashService extends PluginDataHolder {
     } catch (SQLException e) {
       var errorMsg =
           cashDAO.getPlayer().getUniqueId() + " 유저 캐시 추가중 롤백 실패. 금액: " + cashDAO.getAmount()
-              + ", 충전 타입: " + cashDAO.getCashChargeType().getType() + ", 처리자: " + cashDAO.getManager().getDisplayName();
+              + ", 충전 타입: " + cashDAO.getCashChargeType().getType() + ", 처리자: "
+              + cashDAO.getManager().getDisplayName();
+      rollback(errorMsg);
+    }
+  }
+
+  public void takeCash(CashDAO cashDAO) {
+    try {
+      conn().setAutoCommit(false);
+      cashQuery.takeCash(cashDAO, conn());
+      cashLogQuery.takeCashLog(cashDAO, conn());
+
+      conn().commit();
+    } catch (SQLException e) {
+      var errorMsg =
+          cashDAO.getPlayer().getUniqueId() + " 유저 캐시 회수중 롤백 실패. 금액: " + cashDAO.getAmount()
+              + ", 처리자: " + cashDAO.getManager().getDisplayName();
       rollback(errorMsg);
     }
   }
