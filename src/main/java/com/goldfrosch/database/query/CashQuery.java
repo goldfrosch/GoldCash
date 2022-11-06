@@ -13,7 +13,7 @@ public class CashQuery {
     var player = cashDAO.getPlayer();
     try (
         var stmt = conn.prepareStatement(
-            "INSERT INTO player_cash_log SET uuid  = ?, cash = ? ON DUPLICATE KEY UPDATE cash = cash + ?;")
+            "INSERT INTO player_cash SET uuid  = ?, cash = ? ON DUPLICATE KEY UPDATE cash = cash + ?;")
     ) {
       var uuid = player.getUniqueId();
       var amount = cashDAO.getAmount();
@@ -22,7 +22,7 @@ public class CashQuery {
       stmt.setLong(3, amount);
       stmt.execute();
     } catch (SQLException e) {
-      player.sendMessage(ChatColor.RED + "에러가 발생하였습니다. 관리자에게 문의하세요");
+      player.sendMessage(ChatColor.RED + "캐시 추가 중 에러가 발생하였습니다. 관리자에게 문의하세요");
     }
   }
 

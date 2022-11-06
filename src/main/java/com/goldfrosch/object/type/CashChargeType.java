@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum CashChargeType {
+  ADMIN("어드민_테스트"),
   CREDIT_CARD("계좌"),
   GIFT_CARD("문상"),
   ETC("기타");
@@ -20,7 +21,7 @@ public enum CashChargeType {
       Stream.of(values()).collect(
           Collectors.toMap(CashChargeType::getType, CashChargeType::name)));
 
-  private static CashChargeType of(String type) {
+  public static CashChargeType of(String type) {
     return CashChargeType.valueOf(TYPE_MAP.get(type));
   }
 }

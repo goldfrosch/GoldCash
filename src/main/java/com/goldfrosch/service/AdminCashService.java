@@ -24,8 +24,10 @@ public class AdminCashService extends PluginDataHolder {
     try {
       conn().setAutoCommit(false);
       plugin().consoleLog(
-          "###### 캐시 충전 유저: " + cashDAO.getPlayer().getUniqueId() + " 금액: " + cashDAO.getAmount()
-              + "처리자: " + cashDAO.getManager().getDisplayName());
+          "###### 캐시 충전:: 유저: " + cashDAO.getPlayer().getUniqueId() + ", 금액: " + cashDAO.getAmount()
+              + ", 충전 타입: " + cashDAO.getCashChargeType()
+              + ", 충전 상태: " + cashDAO.getCashUseStatus()
+              + ", 처리자: " + cashDAO.getManager().getDisplayName());
       cashQuery.addCash(cashDAO, conn());
       cashLogQuery.addCashLog(cashDAO, conn());
 
@@ -42,6 +44,9 @@ public class AdminCashService extends PluginDataHolder {
   public void takeCash(CashDAO cashDAO) {
     try {
       conn().setAutoCommit(false);
+      plugin().consoleLog(
+          "###### 캐시 회수:: 유저: " + cashDAO.getPlayer().getUniqueId() + ", 금액: " + cashDAO.getAmount()
+              + ", 처리자: " + cashDAO.getManager().getDisplayName());
       cashQuery.takeCash(cashDAO, conn());
       cashLogQuery.takeCashLog(cashDAO, conn());
 
