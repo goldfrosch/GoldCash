@@ -2,17 +2,16 @@ package com.goldfrosch.object.entity;
 
 import com.goldfrosch.object.type.CashChargeType;
 import com.goldfrosch.object.type.CashUseStatus;
-import java.util.UUID;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.entity.Player;
 
 @Getter
 @Setter
 @Builder
 public class CashDAO {
-
-  private UUID uuid;
+  private Player player;
 
   private int amount;
 
@@ -20,7 +19,7 @@ public class CashDAO {
 
   private CashUseStatus cashUseStatus;
 
-  private String manager;
+  private Player manager;
 
   private String product;
 }

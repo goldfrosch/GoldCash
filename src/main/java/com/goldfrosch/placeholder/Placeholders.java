@@ -2,6 +2,7 @@ package com.goldfrosch.placeholder;
 
 import com.goldfrosch.GoldCash;
 import com.goldfrosch.database.query.CashQuery;
+import com.goldfrosch.service.UserCashService;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
 
@@ -10,11 +11,11 @@ import javax.sql.DataSource;
 public class Placeholders extends PlaceholderExpansion {
 
   private final GoldCash plugin;
-  private final CashQuery cashQuery;
+  private final UserCashService userCashService;
 
   public Placeholders(GoldCash plugin, DataSource dataSource) {
     this.plugin = plugin;
-    cashQuery = new CashQuery(plugin, dataSource);
+    this.userCashService = new UserCashService(plugin, dataSource, new CashQuery());
   }
 
   @Override
@@ -49,7 +50,8 @@ public class Placeholders extends PlaceholderExpansion {
     }
     // %cash_amount%
     if (identifier.equalsIgnoreCase("amount")) {
-      return String.valueOf(cashQuery.getCash(p));
+//      return String.valueOf(userCashService.getCash(p));
+      return "";
     }
 
     return null;
