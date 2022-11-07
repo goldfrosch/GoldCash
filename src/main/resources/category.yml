@@ -7,5 +7,5 @@ category:
       - '&6집에 가고싶은 나'
     item:
       material: STONE
-      CustomModelData: 0
-      Amount: 1
+      customModelData: 0
+      amount: 1
