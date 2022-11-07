@@ -1,0 +1,11 @@
+category:
+  test:
+    title: 'test'
+    lore:
+      - '테스트 산 테스트'
+      - '키에에에엑'
+      - '&6집에 가고싶은 나'
+    item:
+      material: STONE
+      CustomModelData: 0
+      Amount: 1

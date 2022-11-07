@@ -2,6 +2,7 @@ package com.goldfrosch;
 
 import com.goldfrosch.commands.Commands;
 import com.goldfrosch.config.Configuration;
+import com.goldfrosch.config.ShopCategoryConfig;
 import com.goldfrosch.object.model.Database;
 import com.goldfrosch.database.DBConverter;
 import com.goldfrosch.database.DBSetup;
@@ -19,6 +20,8 @@ public final class GoldCash extends JavaPlugin {
 
   private Configuration config;
   private DataSource dataSource;
+
+  private ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig(this);
 
   @Override
   public void onEnable() {
@@ -46,6 +49,8 @@ public final class GoldCash extends JavaPlugin {
       consoleDanger("에러 발생", e);
       getServer().getPluginManager().disablePlugin(this);
     }
+
+    shopCategoryConfig.createCategoryConfig();
 
     //command
     var cmd = new Commands(this,"cash", dataSource);
