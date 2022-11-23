@@ -15,13 +15,13 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class GoldCash extends JavaPlugin {
-  private PluginDescriptionFile pdfFile = this.getDescription();
-  private String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
+  private final PluginDescriptionFile pdfFile = this.getDescription();
+  private final String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
 
   private Configuration config;
   private DataSource dataSource;
 
-  private ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig(this);
+  private final ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig(this);
 
   @Override
   public void onEnable() {

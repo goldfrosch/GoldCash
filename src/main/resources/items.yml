@@ -1,0 +1,45 @@
+test-permission:
+  category: 'test'
+  title: 'test'
+  lore:
+    - '테스트 산 테스트'
+    - '키에에에엑'
+    - '&6집에 가고싶은 나'
+  type: PERMISSION
+  permission: 'test.test.test'
+  item:
+    material: STONE
+    customModelData: 0
+    amount: 1
+  price: 5000
+test-command:
+  category: 'test'
+  title: 'test'
+  lore:
+    - '테스트 산 테스트'
+    - '키에에에엑'
+    - '&6집에 가고싶은 나'
+  type: COMMAND
+  command: 'get item cmd'
+  item:
+    material: STONE
+    customModelData: 0
+    amount: 1
+  price: 5000
+test-item:
+  category: 'test'
+  title: 'test'
+  lore:
+    - '테스트 산 테스트'
+    - '키에에에엑'
+    - '&6집에 가고싶은 나'
+  type: ITEM
+  item:
+    material: STONE
+    customModelData: 0
+    amount: 1
+    name: '아이템의 이름름'
+    lore:
+      - '테스트 로어 조이고'
+      - '따흐흐흐흐ㅎ,ㅡㄱ'
+  price: 5000

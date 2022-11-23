@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 @Getter
 @RequiredArgsConstructor
 public class ShopCategoryConfig {
+
   private final GoldCash goldCash;
 
   private static File categoryFile;
@@ -19,13 +20,13 @@ public class ShopCategoryConfig {
 
   public void createCategoryConfig() {
     categoryFile = new File(goldCash.getDataFolder(), "category.yml");
-    if (!categoryFile.exists()) {
-      categoryFile.getParentFile().mkdirs();
-      goldCash.saveResource("category.yml", false);
-    }
-
-    categoryConfig= new YamlConfiguration();
     try {
+      if (!categoryFile.exists()) {
+        categoryFile.getParentFile().mkdirs();
+        categoryConfig.options().copyDefaults(true);
+        categoryConfig.save(categoryFile);
+      }
+      categoryConfig = new YamlConfiguration();
       categoryConfig.load(categoryFile);
     } catch (IOException | InvalidConfigurationException e) {
       e.printStackTrace();
