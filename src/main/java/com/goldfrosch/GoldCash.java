@@ -18,7 +18,6 @@ public final class GoldCash extends JavaPlugin {
   private final PluginDescriptionFile pdfFile = this.getDescription();
   private final String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
 
-  private Configuration config;
   private DataSource dataSource;
 
   private final ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig(this);
@@ -31,7 +30,7 @@ public final class GoldCash extends JavaPlugin {
     getConfig().options().copyDefaults(true);
     saveConfig();
 
-    config = new Configuration(this);
+    var config = new Configuration(this);
 
     try {
       if (config.getDriver().equalsIgnoreCase("mariadb")) {

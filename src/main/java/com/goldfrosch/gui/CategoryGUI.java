@@ -13,15 +13,21 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class CategoryGUI implements Listener {
-  private final Inventory categoryGui = Bukkit.createInventory(null, 9, "캐시 상점 카테고리");
+  private final static int INVENTORY_SIZE = 54;
+  private final Inventory categoryGui = Bukkit.createInventory(null, INVENTORY_SIZE, "캐시 상점 카테고리");
   
   public CategoryGUI() {
     this.initializeItems();
   }
 
   public void initializeItems() {
-    categoryGui.addItem(createGuiItem(Material.DIAMOND_SWORD, "Example Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
-    categoryGui.addItem(createGuiItem(Material.IRON_HELMET, "§bExample Helmet", "§aFirst line of the lore", "§bSecond line of the lore"));
+    for (int i = 0; i < INVENTORY_SIZE; i++) {
+      if ((i / 9) == 0 || (i / 9) == 5 || (i % 9) == 0 || (i % 9) == 8) {
+        categoryGui.setItem(i, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, "", ""));
+      } else {
+        categoryGui.addItem(createGuiItem(Material.DIAMOND_SWORD, "Example Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
+      }
+    }
   }
 
   protected ItemStack createGuiItem(final Material material, final String name, final String... lore) {
