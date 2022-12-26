@@ -12,7 +12,6 @@ import com.goldfrosch.service.AdminCashService;
 import com.goldfrosch.service.UserCashService;
 import java.util.Locale;
 
-import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -26,7 +25,6 @@ public class Commands extends AbstractCommand {
 
   private final AdminCashService adminCashService;
   private final UserCashService userCashService;
-
 
   public Commands(GoldCash plugin, String Command, DataSource dataSource) {
     super(plugin, Command, dataSource);
@@ -126,6 +124,7 @@ public class Commands extends AbstractCommand {
   public void executeCommand(Player player, String[] args) {
     switch (args[0].toUpperCase(Locale.ROOT)) {
       case "HELP" -> this.helpCash(player);
+      case "SHOP" -> CategoryGUI.openInventory(player);
       case "ADMIN" -> this.executeCashAdmin(player, args);
       default -> player.sendMessage(prefix + "존재하지 않는 명령어 입니다.");
     }

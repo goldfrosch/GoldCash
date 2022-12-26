@@ -9,3 +9,13 @@ category:
       material: STONE
       customModelData: 0
       amount: 1
+  test2:
+    title: 'test'
+    lore:
+      - '테스트 산 테스트'
+      - '키에에에엑'
+      - '&6집에 가고싶은 나'
+    item:
+      material: STONE
+      customModelData: 0
+      amount: 1

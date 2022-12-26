@@ -1,5 +1,7 @@
 package com.goldfrosch.config;
 
+import static com.goldfrosch.GoldCash.plugin;
+
 import com.goldfrosch.GoldCash;
 import java.io.File;
 import java.io.IOException;
@@ -13,21 +15,20 @@ import org.bukkit.configuration.file.YamlConfiguration;
 @RequiredArgsConstructor
 public class ShopCategoryConfig {
 
-  private final GoldCash goldCash;
-
-  private static File categoryFile;
-  private static FileConfiguration categoryConfig;
+  public static File categoryFile;
+  public static FileConfiguration categoryConfig;
 
   public void createCategoryConfig() {
-    categoryFile = new File(goldCash.getDataFolder(), "category.yml");
     try {
+      categoryFile = new File(plugin.getDataFolder(), "category.yml");
+      categoryConfig = new YamlConfiguration();
       if (!categoryFile.exists()) {
         categoryFile.getParentFile().mkdirs();
-        categoryConfig.options().copyDefaults(true);
+        plugin.saveResource("category.yml", false);
         categoryConfig.save(categoryFile);
       }
-      categoryConfig = new YamlConfiguration();
       categoryConfig.load(categoryFile);
+      categoryConfig.options().copyDefaults(true);
     } catch (IOException | InvalidConfigurationException e) {
       e.printStackTrace();
     }

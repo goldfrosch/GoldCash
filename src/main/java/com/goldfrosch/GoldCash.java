@@ -10,17 +10,24 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import javax.sql.DataSource;
+import lombok.Getter;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
+@Getter
 public final class GoldCash extends JavaPlugin {
   private final PluginDescriptionFile pdfFile = this.getDescription();
   private final String pfName = pdfFile.getName() + " v" + pdfFile.getVersion();
+  public static GoldCash plugin;
 
   private DataSource dataSource;
 
-  private final ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig(this);
+  private final ShopCategoryConfig shopCategoryConfig = new ShopCategoryConfig();
+
+  public GoldCash() {
+    plugin = this;
+  }
 
   @Override
   public void onEnable() {
