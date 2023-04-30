@@ -5,10 +5,7 @@ import static com.goldfrosch.GoldCash.plugin;
 import com.goldfrosch.config.ShopCategoryConfig;
 import com.goldfrosch.object.model.CashShopCategory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 import com.goldfrosch.object.model.CashShopItem;
 import org.bukkit.Bukkit;
@@ -38,22 +35,23 @@ public class CategoryGUI implements Listener {
     var itemKeyList = new ArrayList<>(itemArray);
     for (int i = 0; i < INVENTORY_SIZE; i++) {
       if ((i / 9) == 0 || (i / 9) == 5 || (i % 9) == 0 || (i % 9) == 8) {
-        categoryGui.setItem(i, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, "", ""));
+        categoryGui.setItem(i, createGuiItem(CashShopItem.builder().title("").material(Material.GRAY_STAINED_GLASS_PANE).lore(new ArrayList<>()).build()));
       } else {
-        var itemObject = (CashShopItem) configSection.get(itemKeyList.get(0), new CashShopItem());
-        categoryGui.addItem(createGuiItem(Material.DIAMOND_SWORD, "Example Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
+        var itemObject = (CashShopItem) configSection.get(itemKeyList.get(0));
+        if (itemObject != null) {
+          categoryGui.addItem(createGuiItem(itemObject));
+        }
       }
     }
   }
 
-  protected ItemStack createGuiItem(final Material material, final String name,
-      final String... lore) {
-    final var item = new ItemStack(material, 1);
+  protected ItemStack createGuiItem(final CashShopItem cashShopItem) {
+    final var item = new ItemStack(cashShopItem.getMaterial(), cashShopItem.getAmount());
     final var meta = item.getItemMeta();
 
-    Objects.requireNonNull(meta).setDisplayName(name);
+    Objects.requireNonNull(meta).setDisplayName(cashShopItem.getTitle());
 
-    meta.setLore(Arrays.asList(lore));
+    meta.setLore(cashShopItem.getLore());
 
     item.setItemMeta(meta);
 
