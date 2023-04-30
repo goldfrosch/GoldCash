@@ -4,9 +4,13 @@ import static com.goldfrosch.GoldCash.plugin;
 
 import com.goldfrosch.config.ShopCategoryConfig;
 import com.goldfrosch.object.model.CashShopCategory;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import com.goldfrosch.object.model.CashShopItem;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -29,10 +33,14 @@ public class CategoryGUI implements Listener {
   }
 
   public void initializeItems() {
+    var configSection = ShopCategoryConfig.categoryConfig.getConfigurationSection("category");
+    var itemArray = Objects.requireNonNull(configSection).getKeys(false);
+    var itemKeyList = new ArrayList<>(itemArray);
     for (int i = 0; i < INVENTORY_SIZE; i++) {
       if ((i / 9) == 0 || (i / 9) == 5 || (i % 9) == 0 || (i % 9) == 8) {
         categoryGui.setItem(i, createGuiItem(Material.GRAY_STAINED_GLASS_PANE, "", ""));
       } else {
+        var itemObject = (CashShopItem) configSection.get(itemKeyList.get(0), new CashShopItem());
         categoryGui.addItem(createGuiItem(Material.DIAMOND_SWORD, "Example Sword", "§aFirst line of the lore", "§bSecond line of the lore"));
       }
     }
